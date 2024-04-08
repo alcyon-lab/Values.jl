@@ -2,7 +2,6 @@ module AlcyonValue
 
 using MacroTools
 using TermInterface
-using SymbolicUtils
 
 # updated form of
 # https://discourse.julialang.org/t/get-a-symbol-vector-of-all-variable-names-in-an-expr/39391/3
