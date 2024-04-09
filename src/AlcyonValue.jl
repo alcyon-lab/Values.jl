@@ -153,6 +153,23 @@ end
 
 # Substitution
 
+
+function substitute(e::Union{Value,Expr,Symbol,Number}, pairs::Vector{Pair})
+    res = e
+    for pair in pairs
+        res = substitute(res, pair)
+    end
+    return res
+end
+
+function substitute(e::Union{Value,Expr,Symbol,Number}, pairs::Dict)
+    res = e
+    for pair in pairs
+        res = substitute(res, pair)
+    end
+    return res
+end
+
 function substitute(e::Value, pair::Pair)
     return substitute(e.val, pair)
 end
