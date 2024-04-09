@@ -6,7 +6,7 @@ using AlcyonValue
 
 
 @testset "AlcyonValue.jl" begin
-    @testset "Symbolics.Value gemnerators" begin
+    @testset "Value generators" begin
         a = Symbol("a")
         b = Symbol("b")
         @test typeof(Value(3)) == Value
@@ -14,7 +14,7 @@ using AlcyonValue
         @test typeof(Value(:(a + 3 * b))) == Value
     end
 
-    @testset "Symbolics.Value equality" begin
+    @testset "Value equality" begin
         a = Symbol("a")
         b = Symbol("b")
         @test Value(3) == 3
@@ -24,7 +24,18 @@ using AlcyonValue
         @test a + b == Value(a + b)
     end
 
-    @testset "Symbolics.Value unitary -" begin
+    @testset "Value substitute" begin
+        a = Symbol("a")
+        @test substitute(3, Pair(a, 1)) == 3
+        @test substitute(3, Pair(a, 2)) == 3
+        @test substitute(Value(3), Pair(a, 1)) == 3
+        @test substitute(Value(a), Pair(a, 3)) == 3
+        @test substitute(Value(a), Pair(a, 1)) != 3
+        @test substitute(Value(:(a + 2)), Pair(a, 1)) == :(1 + 2)
+        @test eval(substitute(Value(:(a + 2)), Pair(a, 1))) == 3
+    end
+
+    @testset "Value unitary -" begin
         a = Symbol("a")
         b = Symbol("b")
         @test -Value(3) == -3
@@ -33,12 +44,21 @@ using AlcyonValue
     end
 
 
-    @testset "Symbolics.Value addition" begin
+    @testset "Value addition" begin
         a = Symbol("a")
         b = Symbol("b")
+        pairs = Dict(a => 13, b => 17)
         @test Value(3) + 4 == 7
         @test -Value(a) + b == -a + b
-        # @test Value(a+b)+ :(a+b) == 2*(a+b)
+        @test eval(substitute(Value(a + b) + :(a + b), pairs)) == eval(substitute(2 * (a + b), pairs))
+    end
+
+    @testset "Value power free vars" begin
+        a = Symbol("a")
+        b = Symbol("b")
+        @test (Value(a)^Value(b)).free == Value(a^b).free
+        @test (Value(a)^Value(b)).free == Set([a, b])
+        @test (Value(a)^Value(a)).free == Set([a])
     end
 end
 @testset "AlcyonValue.jl Aqua" begin
