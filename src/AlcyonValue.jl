@@ -90,6 +90,36 @@ function Base.transpose(x::Union{Value,Symbol,Expr})
     return x
 end
 
+# For TermInterface
+function isexpr(x::Value)
+    return isexpr(x.val)
+end
+
+function head(x::Value)
+    return head(x.val)
+end
+
+function children(x::Value)
+    return children(x.val)
+end
+
+function iscall(x::Value)
+    return iscall(x.val)
+end
+
+function operation(x::Value)
+    return operation(x.val)
+end
+
+function arguments(x::Value)
+    return arguments(x)
+end
+
+function maketerm(Value, head, children, type=nothing, metadata=nothing)
+    expr = maketerm(Expr, head, children)
+    return Value(expr)
+end
+
 # Equality - Comparison
 function Base.:(==)(b::Value, a::Value)
     return a.val == b.val
