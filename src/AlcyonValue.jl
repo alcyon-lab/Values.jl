@@ -41,6 +41,9 @@ end
 function Value(a::Symbol)
     return Value(a, Set{Symbol}([a]), Set{Symbol}([]))
 end
+function Base.string(v::Value)
+    return string(v.val)
+end
 Base.convert(::Type{Value}, x::Number) = Value(x)
 Base.convert(::Type{Value}, x::Expr) = Value(x)
 Base.convert(::Type{Value}, x::Symbol) = Value(x)
@@ -55,7 +58,39 @@ function Base.convert(::Type{Number}, x::Value)
     end
 end
 
-# Equality
+# Misc
+Base.zero(::Type{Value}) = zero(Number)
+Base.one(::Type{Value}) = one(Number)
+
+function Base.length(::Value)
+    return 1
+end
+
+function Base.iterate(::Value, nothing)
+    return nothing
+end
+
+function Base.iterate(x::Value)
+    return (x, nothing)
+end
+
+function Base.isinteger(::Union{Symbol,Expr})
+    return false
+end
+
+function Base.isinteger(x::Value)
+    return isinteger(x.val)
+end
+
+function Base.Integer(x::Value)
+    return Integer(x.val)
+end
+
+function Base.transpose(x::Union{Value,Symbol,Expr})
+    return x
+end
+
+# Equality - Comparison
 function Base.:(==)(b::Value, a::Value)
     return a.val == b.val
 end
@@ -64,6 +99,16 @@ function Base.:(==)(a::Value, b::Any)
 end
 function Base.:(==)(b::Any, a::Value)
     return a.val == b
+end
+
+function Base.isless(a::Value, b::Value)
+    return isless(a.val, b.val)
+end
+function Base.isless(a::Value, b::Union{Number,Expr,Symbol})
+    return isless(a.val, b)
+end
+function Base.isless(a::Union{Number,Expr,Symbol}, b::Value)
+    return isless(a, b.val)
 end
 
 # Expr Arithmetics
