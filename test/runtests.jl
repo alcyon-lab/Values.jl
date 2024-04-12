@@ -61,6 +61,6 @@ using Values
         @test (Value(a)^Value(a)).free == Set([a])
     end
 end
-@testset "AlcyonValue.jl Aqua" begin
+@testset "Values.jl Aqua" begin
     Aqua.test_all(AlcyonValue)
 end
