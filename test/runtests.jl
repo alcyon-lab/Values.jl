@@ -1,11 +1,11 @@
 cd(@__DIR__)
 using Aqua
 using Test
-using AlcyonValue
+using Values
 
 
 
-@testset "AlcyonValue.jl" begin
+@testset "Values.jl" begin
     @testset "Value generators" begin
         a = Symbol("a")
         b = Symbol("b")

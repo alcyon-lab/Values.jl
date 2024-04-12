@@ -1,13 +1,13 @@
-using AlcyonValue
+using Values
 using Documenter
 
-DocMeta.setdocmeta!(AlcyonValue, :DocTestSetup, :(using AlcyonValue); recursive=true)
+DocMeta.setdocmeta!(Values, :DocTestSetup, :(using Values); recursive=true)
 
 makedocs(;
-    modules=[AlcyonValue],
+    modules=[Values],
     authors="Alcyon Lab",
-    repo="https://github.com/alcyon-lab/AlcyonValue.jl/blob/{commit}{path}#{line}",
-    sitename="AlcyonValue.jl",
+    repo="https://github.com/alcyon-lab/Values.jl/blob/{commit}{path}#{line}",
+    sitename="Values.jl",
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
         edit_link="master",

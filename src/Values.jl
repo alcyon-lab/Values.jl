@@ -1,4 +1,4 @@
-module AlcyonValue
+module Values
 
 using MacroTools
 using TermInterface

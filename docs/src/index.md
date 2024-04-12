@@ -1,14 +1,14 @@
 ```@meta
-CurrentModule = AlcyonValue
+CurrentModule = Values
 ```
 
-# AlcyonValue
+# Values
 
-Documentation for [AlcyonValue](https://github.com/alcyon-lab/AlcyonValue.jl).
+Documentation for [Values](https://github.com/alcyon-lab/Values.jl).
 
 ```@index
 ```
 
 ```@autodocs
-Modules = [AlcyonValue]
+Modules = [Values]
 ```
