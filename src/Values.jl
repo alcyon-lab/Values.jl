@@ -44,6 +44,13 @@ end
 function Base.string(v::Value)
     return string(v.val)
 end
+function Base.summary(io::IO, v::Value)
+    summary(io, v.val)
+end
+
+function Base.show(io::IO, v::Value)
+    show(io, v.val)
+end
 Base.convert(::Type{Value}, x::Number) = Value(x)
 Base.convert(::Type{Value}, x::Expr) = Value(x)
 Base.convert(::Type{Value}, x::Symbol) = Value(x)
