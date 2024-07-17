@@ -1,7 +1,7 @@
 name = "Values"
 uuid = "a33b2169-df44-41c1-bcb8-32c383ca81e5"
 authors = ["Alcyon Lab"]
-version = "1.0.5-DEV"
+version = "0.1.6"
 
 [deps]
 MacroTools = "1914dd2f-81c6-5fcd-8719-6d5c9610ff09"
