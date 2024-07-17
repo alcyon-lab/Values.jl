@@ -93,6 +93,10 @@ function Base.Integer(x::Value)
     return Integer(x.val)
 end
 
+function Base.Number(x::Value)
+    return Number(x.val)
+end
+
 function Base.transpose(x::Union{Value,Symbol,Expr})
     return x
 end
